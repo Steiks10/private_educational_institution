@@ -10,3 +10,4 @@ class CalendarCourses(models.Model):
    semester = fields.Char(related='course_id.subject_id.semester', string='Semester')
    limit_students = fields.Integer(related='course_id.limit_students', string='Max capacity')
    current_inscribed = fields.Integer(related='course_id.inscribed', string='Current inscribed')
+
