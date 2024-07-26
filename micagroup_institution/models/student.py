@@ -8,6 +8,7 @@ class Student(models.Model):
 
     name = fields.Char(string="Name", required=True)
     birth_date = fields.Date(string='Birth Date', required=True)
+    identification = fields.Char(string='Identification', required=True)
     email = fields.Char(string='Email', required=True)
     phone = fields.Char(string='Phone')
     address = fields.Text(string='Address', required=True)
@@ -26,6 +27,7 @@ class Student(models.Model):
         ('expelled', 'Expelled')
     ], string="State", required=True)
     academic_record = fields.Many2many(comodel_name='course.course', string='Academic Record')
-    thesis = fields.Binary(string='thesis')
+    thesis = fields.Binary(string='Thesis')
+    image = fields.Image(string='Image')
 
 

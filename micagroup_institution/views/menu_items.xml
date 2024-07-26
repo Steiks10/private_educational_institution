@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+<!--        Principal Menu-->
+        <menuitem id="private_institution_principal_menu"
+                  name="Private Institution" sequence="1"
+                  web_icon="micagroup_institution,static/description/odoo_icon.png"
+                  action="action_subjects_views"/>
+
+<!--        menus-->
+        <menuitem id="student_of_private_institution_menu"
+                  name="Students" sequence="2"
+                  parent="private_institution_principal_menu"/>
+
+        <menuitem id="subjects_of_private_institution_menu"
+                  name="Inscriptions" sequence="3"
+                  parent="private_institution_principal_menu"/>
+
+        <menuitem id="management_of_private_institution_menu"
+                  name="Management" sequence="4"
+                  parent="private_institution_principal_menu"/>
+
+<!-- Submenu  -->
+        <menuitem id="all_student_of_private_institution_menu"
+                  name="Student" sequence="1"
+                  parent="student_of_private_institution_menu"
+                  action="action_student_views"/>
+
+        <menuitem id="inscription_contract_of_private_institution_menu"
+                  name="Contract" sequence="2"
+                  parent="student_of_private_institution_menu"
+                  action="action_inscription_contract_views"/>
+
+<!--        <menuitem id="management_of_private_institution_menu"-->
+<!--                  name="career" sequence="5"-->
+<!--                  parent="student_of_private_institution_menu"-->
+<!--                  action="action_student_views"/>-->
+        <menuitem id="management_teacher_of_private_institution_menu"
+                  name="Teachers" sequence="1"
+                  parent="management_of_private_institution_menu"
+                  action="action_teacher_views"/>
+
+        <menuitem id="management_course_of_private_institution_menu"
+                  name="Courses" sequence="2"
+                  parent="management_of_private_institution_menu"
+                  action="action_course_views"/>
+
+        <menuitem id="career_of_private_institution_menu"
+                  name="Career" sequence="3"
+                  parent="management_of_private_institution_menu"
+                  action="action_career_views"/>
+
+    </data>
+</odoo>

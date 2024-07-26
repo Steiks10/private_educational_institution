@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="course_tree_view" model="ir.ui.view">
+            <field name="name">course_tree_view</field>
+            <field name="model">course.course</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="score"/>
+                    <field name="subject_id"/>
+                    <field name="limit_students"/>
+                    <field name="current_inscribed"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="course_form_view" model="ir.ui.view">
+            <field name="name">course_form_view</field>
+            <field name="model">course.course</field>
+            <field name="arch" type="xml">
+                <form string="Course">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="score"/>
+                                <field name="subject_id"/>
+                            </group>
+                            <group>
+                                <field name="limit_students"/>
+                                <field name="current_inscribed"/>
+                                <field name="teacher_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_course_views" model="ir.actions.act_window" >
+            <field name="name">Course Views</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">course.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

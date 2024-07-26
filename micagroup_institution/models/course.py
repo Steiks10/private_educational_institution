@@ -8,11 +8,15 @@ class CourseGrade(models.Model):
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string='Code', required=True)
-    score = fields.Char(string='Score', required=True)
+    score = fields.Float(string='Score', required=True)
     calendar_event_ids = fields.Many2many(comodel_name='calendar.event', string='Calendar')
     student_ids = fields.Many2many(comodel_name='student.student', string='Students')
     subject_id = fields.Many2one(comodel_name='subject.subject', string='Subject')
     limit_students = fields.Integer(string='Max capacity')
     current_inscribed = fields.Integer(string='Current inscribed')
-    # calendar_event_ids = fields.Many2many(comodel_name='calendar.event', string='Calendar')
-
+    state = fields.Selection(selection=[
+        ('in_progress', 'In progress'),
+        ('passed', 'Passed'),
+        ('reproved', 'Reproved'),
+    ])
+    teacher_id = fields.Many2one(comodel_name='teacher.teacher', string="Teacher")

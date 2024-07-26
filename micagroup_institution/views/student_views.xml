@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="student_form_view" model="ir.ui.view">
+            <field name="name">student_form_view</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <form string="Student">
+<!--                    <header>-->
+<!--                        <field name="semester" widget="statusbar" statusbar_visible="first_semester,second_semester,third_semester,fourth_semester,fifth_semester,sixth_semester,seventh_semester,eighth_semester,nineth_semester,tenth_semester"/>-->
+<!--                    </header>-->
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="identification"/>
+                                <field name="birth_date"/>
+                                <field name="email"/>
+                                <field name="phone"/>
+                                <field name="gender"/>
+                                <field name="address"/>
+                            </group>
+                            <group>
+                                <field name="state"/>
+                                <field name="enrollment_date"/>
+                                <field name="graduation_date"/>
+                                <field name="thesis"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="student_kanban_view" model="ir.ui.view">
+            <field name="name">student_kanban_view</field>
+            <field name="model">student.student</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+<!--                    <field name="semester"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="o_kanban_card_content d-flex">
+                                    <div>
+                                        <field name="image" widget="image" class="oe_avatar" alt="Avatar"/>
+                                    </div>
+                                    <div class="oe_kanban_details d-flex flex-column ms-3">
+                                        <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                                        <div class="d-flex align-items-baseline text-break">
+                                            <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"/><field name="email"/>
+                                        </div>
+                                        <div class="o_kanban_tags_section"/>
+                                        <ul>
+                                            <li>Identification: <field name="identification"/></li>
+                                            <li>Phone: <field name="phone"/></li>
+                                            <li>Gender: <field name="gender"/></li>
+                                            <li>Enrollment date: <field name="enrollment_date"/></li>
+                                            <li>State: <field name="state"/></li>
+                                            <li>Birthday: <field name="birth_date"/></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_student_views" model="ir.actions.act_window" >
+            <field name="name">Student Views</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.student</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -7,6 +7,7 @@ class Teacher(models.Model):
     _description = "Teacher"
 
     name = fields.Char(string="Name", required=True)
+    identification = fields.Char(string='Identification', required=True)
     birth_date = fields.Date(string='Birth Date', required=True)
     email = fields.Char(string='Email', required=True)
     phone = fields.Char(string='Phone')
@@ -17,4 +18,4 @@ class Teacher(models.Model):
                 ('N/A', 'No responder')],
                 string="Gender", required=True)
     date_of_admision = fields.Date(string='Enrollment Date', required=True, default=datetime.today())
-
+    image = fields.Image(string='Image')

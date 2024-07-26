@@ -4,15 +4,23 @@ from datetime import date, datetime, timedelta
 class Contract(models.Model):
     _name = "inscription.contract"
     _inherit = ['mail.thread']
-    _description = "Contract"
+    _description = "Inscription Contract"
 
-    name = fields.Char(string="Name", required=True)
-    is_active = fields.Boolean(string="Is Active", required=True)
+    name = fields.Char(string="Name", compute='get_name_according_to_student')
+    is_paid = fields.Boolean(string="Is paid", default=False)
     code = fields.Char(string='Code', required=True)
     credits = fields.Integer(string='Credits', required=True)
     theory_hours = fields.Integer(string='Theory Hours')
     practice_hours = fields.Integer(string='Practice Hours')
-    limit_students = fields.Integer(string='Max capacity')
+    student_id = fields.Many2one(comodel_name='student.student', string='Student', required=False)
+    # student_contract_id = fields.Many2one(comodel_name='student.student', string)
+    course_ids = fields.Many2many(comodeL_name='course.course', string='Courses')
 
-    # calendar_event_ids = fields.Many2many(comodel_name='calendar.event', string='Calendar')
-
+    @api.depends('student_id')
+    def get_name_according_to_student(self):
+        for record in self:
+            if record.student_id:
+                record.name = f"Contract for {record.student_id.name}"
+            else:
+                record.name = False
+                print(record)
