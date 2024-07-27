@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="private_institution_calendar_courses" model="ir.ui.view">
+            <field name="name">crm.form.inherit.many.chat.integration</field>
+            <field name="model">calendar.event</field>
+            <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='page_details']//group//group[2]//field[@name='categ_ids']" position="after">
+                    <field name="course_id"/>
+                    <field name="teacher_name"/>
+                    <field name="code"/>
+                    <field name="semester"/>
+                    <field name="limit_students"/>
+                    <field name="current_inscribed"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -12,6 +12,17 @@ class Subject(models.Model):
     credits = fields.Integer(string='Credits', required=True)
     theory_hours = fields.Integer(string='Theory Hours')
     practice_hours = fields.Integer(string='Practice Hours')
-    semester = fields.Integer(string='Semester')
-    # calendar_event_ids = fields.Many2many(comodel_name='calendar.event', string='Calendar')
-
+    semester = fields.Selection(selection=[
+        ('first_semester', 'First semester'),
+        ('second_semester', 'Second semester'),
+        ('third_semester', 'Third semester'),
+        ('fourth_semester', 'Fourth semester'),
+        ('fifth_semester', 'Fifth semester'),
+        ('sixth_semester', 'Sixth semester'),
+        ('seventh_semester', 'Seventh semester'),
+        ('eighth_semester', 'Eighth semester'),
+        ('nineth_semester', 'Ninth semester'),
+        ('tenth_semester', 'Tenth semester'),
+    ], string='Semester', required=True)
+    career_id = fields.Many2one(comodel_name='career.career',  string='Career')
+    image = fields.Image(string='Imagen')
