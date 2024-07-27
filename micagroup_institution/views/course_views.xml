@@ -9,11 +9,11 @@
                 <tree>
                     <field name="name"/>
                     <field name="code"/>
-                    <field name="score"/>
+<!--                    <field name="score"/>-->
                     <field name="subject_id"/>
                     <field name="limit_students"/>
                     <field name="current_inscribed"/>
-                    <field name="state"/>
+<!--                    <field name="state"/>-->
                 </tree>
             </field>
         </record>
@@ -33,7 +33,7 @@
                         <group>
                             <group>
                                 <field name="code"/>
-                                <field name="score"/>
+<!--                                <field name="score"/>-->
                                 <field name="subject_id"/>
                             </group>
                             <group>
@@ -42,6 +42,63 @@
                                 <field name="teacher_id"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Classes" name="course_classes">
+                                <field name="calendar_event_ids">
+                                    <tree>
+                                        <field name="start"/>
+                                        <field name="stop"/>
+                                        <field name="duration"/>
+                                        <field name="rrule_type"/>
+<!--                                        <field name="week_days"/>-->
+                                        <field name="videocall_location"/>
+                                        <field name="location" string="classroom"/>`
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Students" name="student_in_course">
+                                <field name="student_grade_ids">
+                                    <kanban>
+                                        <field name="id"/>
+                                        <field name="student_id"/>
+                                        <field name="student_id_email"/>
+            <!--                            <field name="image"/>-->
+                                        <templates>
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_card oe_kanban_global_click">
+                                                    <div class="o_kanban_card_content d-flex">
+                                                        <div>
+                                                            <field name="student_id_image" widget="image" class="oe_avatar" alt="Avatar"/>
+                                                        </div>
+                                                        <div class="oe_kanban_details d-flex flex-column ms-3">
+                                                            <strong class="o_kanban_record_title oe_partner_heading"><field name="student_id"/></strong>
+                                                            <div class="d-flex align-items-baseline text-break" >
+                                                                <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"/><field name="student_id_email"/>
+                                                            </div>
+                                                            <div class="o_kanban_tags_section"/>
+                                                            <ul>
+                                                                <li>Identification card: <field name="student_id_identification"/></li>
+                                                                <li>Phone: <field name="student_id_phone"/></li>
+<!--                                                                <li>Score: <field name="score"/></li>-->
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+
+<!--                                    <tree>-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="identification"/>-->
+<!--                                        <field name="email"/>-->
+<!--                                        <field name="phone"/>-->
+<!--                                        <field name="gender"/>-->
+<!--                                        <field name="enrollment_date"/>-->
+<!--                                    </tree>-->
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

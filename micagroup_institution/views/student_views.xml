@@ -34,6 +34,21 @@
                                 <field name="thesis"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Courses" name="student_courses">
+                                <field name="academic_record_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="code"/>
+<!--                                        <field name="state"/>-->
+                                        <field name="subject_id"/>
+                                        <field name="teacher_id"/>
+                                        <field name="limit_students"/>
+                                        <field name="current_inscribed"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

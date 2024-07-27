@@ -42,6 +42,21 @@
                                 <field name="practice_hours"/>
                             </group>
                         </group>
+                        <notebook>
+                            <page string="Courses" name="courses_contract">
+                                <field name="course_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="subject_id"/>
+                                        <field name="teacher_id"/>
+<!--                                        <field name="practice_hours"/>-->
+
+<!--                                        <field name="score"/>-->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

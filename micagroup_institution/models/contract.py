@@ -14,7 +14,7 @@ class Contract(models.Model):
     practice_hours = fields.Integer(string='Practice Hours')
     student_id = fields.Many2one(comodel_name='student.student', string='Student', required=False)
     # student_contract_id = fields.Many2one(comodel_name='student.student', string)
-    course_ids = fields.Many2many(comodeL_name='course.course', string='Courses')
+    course_ids = fields.Many2many(comodel_name='course.course', string='Courses')
 
     @api.depends('student_id')
     def get_name_according_to_student(self):

@@ -1,6 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_student_student,access_student_student,model_student_student,,1,1,1,1
 access_course_course,access_course_course,model_course_course,,1,1,1,1
+access_course_course_line,access_course_course_line,model_course_course_line,,1,1,1,1
 access_subject_subject,access_subject_subject,model_subject_subject,,1,1,1,1
 access_teacher_teacher,access_teacher_teacher,model_teacher_teacher,,1,1,1,1
 access_inscription_contract,access_inscription_contract,model_inscription_contract,,1,1,1,1

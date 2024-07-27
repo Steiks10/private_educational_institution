@@ -26,7 +26,7 @@ class Student(models.Model):
         ('dropped', 'Dropped'),
         ('expelled', 'Expelled')
     ], string="State", required=True)
-    academic_record = fields.Many2many(comodel_name='course.course', string='Academic Record')
+    academic_record_ids = fields.Many2many(comodel_name='course.course', string='Academic Record')
     thesis = fields.Binary(string='Thesis')
     image = fields.Image(string='Image')
 
