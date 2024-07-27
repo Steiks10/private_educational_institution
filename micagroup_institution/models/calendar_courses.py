@@ -13,4 +13,4 @@ class CalendarCourses(models.Model):
 
    def get_semester_from_course_id(self):
        for record in self:
-           record.semester = record.course_id.subject_id.semester
+           record.semester = record.course_id.subject_id.semester_id.name

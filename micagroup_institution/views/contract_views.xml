@@ -23,6 +23,9 @@
             <field name="model">inscription.contract</field>
             <field name="arch" type="xml">
                 <form string="Inscription Contract">
+                    <header>
+                        <button name="action_payment_inscription_contract" class="oe_highlight" string="Pay" type="object"/>
+                    </header>
                     <sheet>
                         <div class="oe_title" attrs="{'invisible': [('name', '=', False)]}">
                             <label for="name"/>

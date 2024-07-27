@@ -50,5 +50,10 @@
                   parent="management_of_private_institution_menu"
                   action="action_career_views"/>
 
+        <menuitem id="semester_of_private_institution_menu"
+                  name="Semester" sequence="4"
+                  parent="management_of_private_institution_menu"
+                  action="action_semester_views"/>
+
     </data>
 </odoo>

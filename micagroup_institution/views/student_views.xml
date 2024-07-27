@@ -20,14 +20,16 @@
                         </div>
                         <group>
                             <group>
+                                <field name="res_user_id"/>
+                                <field name="code"/>
                                 <field name="identification"/>
                                 <field name="birth_date"/>
                                 <field name="email"/>
                                 <field name="phone"/>
                                 <field name="gender"/>
-                                <field name="address"/>
                             </group>
                             <group>
+                                <field name="address"/>
                                 <field name="state"/>
                                 <field name="enrollment_date"/>
                                 <field name="graduation_date"/>
