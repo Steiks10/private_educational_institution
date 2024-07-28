@@ -32,6 +32,7 @@ class Student(models.Model):
     image = fields.Image(string='Image')
     res_user_id = fields.Many2one(comodel_name='res.users', string='Usuario')
 
+    @api.model
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].sudo().next_by_code('sequence_student_private_institution')
         return super(Student, self).create(vals)

@@ -23,6 +23,9 @@
             <field name="model">course.course</field>
             <field name="arch" type="xml">
                 <form string="Course">
+<!--                    <header>-->
+<!--                        <button name="action_write_note_to_student" class="oe_highlight" string="Change notes" type="object"/>-->
+<!--                    </header>-->
                     <sheet>
                         <div class="oe_title">
                             <label for="name"/>

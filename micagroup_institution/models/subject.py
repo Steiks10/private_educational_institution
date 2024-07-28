@@ -25,18 +25,6 @@ class Subject(models.Model):
     credits = fields.Integer(string='Credits', required=True)
     theory_hours = fields.Integer(string='Theory Hours')
     practice_hours = fields.Integer(string='Practice Hours')
-    # semester = fields.Selection(selection=[
-    #     ('first_semester', 'First semester'),
-    #     ('second_semester', 'Second semester'),
-    #     ('third_semester', 'Third semester'),
-    #     ('fourth_semester', 'Fourth semester'),
-    #     ('fifth_semester', 'Fifth semester'),
-    #     ('sixth_semester', 'Sixth semester'),
-    #     ('seventh_semester', 'Seventh semester'),
-    #     ('eighth_semester', 'Eighth semester'),
-    #     ('nineth_semester', 'Ninth semester'),
-    #     ('tenth_semester', 'Tenth semester'),
-    # ], string='Semester', required=True)
     semester_id = fields.Many2one(comodel_name='semester.semester', string='Semester')
     career_id = fields.Many2one(comodel_name='career.career',  string='Career')
     image = fields.Image(string='Imagen')
@@ -52,5 +40,5 @@ class Subject(models.Model):
     @api.model
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].sudo().next_by_code('sequence_subject_private_institution')
-        subject =  super(Subject, self).create(vals)
+        subject = super(Subject, self).create(vals)
         return subject

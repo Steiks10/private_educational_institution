@@ -77,6 +77,7 @@ class Contract(models.Model):
             else:
                 record.is_paid = False
 
+    @api.model
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].sudo().next_by_code('sequence_contract_private_institution')
         return super(Contract, self).create(vals)
