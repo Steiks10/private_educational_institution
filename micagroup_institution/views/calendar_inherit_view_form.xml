@@ -8,11 +8,13 @@
             <field name="arch" type="xml">
                 <xpath expr="//page[@name='page_details']//group//group[2]//field[@name='categ_ids']" position="after">
                     <field name="course_id"/>
-                    <field name="teacher_name"/>
+                    <field name="teacher_id"/>
                     <field name="code"/>
                     <field name="semester"/>
                     <field name="limit_students"/>
                     <field name="current_inscribed"/>
+                    <field name="practice_hours"/>
+                    <field name="theory_hours"/>
                 </xpath>
             </field>
         </record>

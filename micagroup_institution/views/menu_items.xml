@@ -31,6 +31,13 @@
                   parent="student_of_private_institution_menu"
                   action="action_inscription_contract_views"/>
 
+        <menuitem id="student_grades_of_private_institution_menu"
+                  name="Notes" sequence="3"
+                  parent="student_of_private_institution_menu"
+                  action="action_student_grades_views"/>
+
+
+
 <!--        <menuitem id="management_of_private_institution_menu"-->
 <!--                  name="career" sequence="5"-->
 <!--                  parent="student_of_private_institution_menu"-->
@@ -49,6 +56,16 @@
                   name="Career" sequence="3"
                   parent="management_of_private_institution_menu"
                   action="action_career_views"/>
+
+        <menuitem id="semester_of_private_institution_menu"
+                  name="Semester" sequence="4"
+                  parent="management_of_private_institution_menu"
+                  action="action_semester_views"/>
+
+        <menuitem id="evaluation_of_private_institution_menu"
+                  name="Evaluations of courses" sequence="5"
+                  parent="management_of_private_institution_menu"
+                  action="action_evaluation_views"/>
 
     </data>
 </odoo>

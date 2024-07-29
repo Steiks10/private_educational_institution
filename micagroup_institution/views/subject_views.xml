@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Subject">
                     <header>
-                        <field name="semester" widget="statusbar" statusbar_visible="first_semester,second_semester,third_semester,fourth_semester,fifth_semester,sixth_semester,seventh_semester,eighth_semester,nineth_semester,tenth_semester"/>
+                        <field name="semester_id" widget="statusbar" class="o_field_statusbar"/>
                     </header>
                     <sheet>
                         <field name="image" widget="image" class="oe_avatar"/>
@@ -21,12 +21,13 @@
                         <group>
                             <group>
                                 <field name="code"/>
+<!--                                <field name="sequence" invisible="0"/>-->
                                 <field name="is_active"/>
                                 <field name="credits"/>
                                 <field name="career_id"/>
                             </group>
                             <group>
-                                <field name="semester"/>
+<!--                                <field name="semester_id"/>-->
                                 <field name="theory_hours"/>
                                 <field name="practice_hours"/>
                             </group>
@@ -40,28 +41,29 @@
             <field name="name">subject_kanban_view</field>
             <field name="model">subject.subject</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="semester">
+                <kanban default_group_by="semester_id">
+<!--                    default_group_by="semester" -->
                     <field name="name"/>
-                    <field name="semester"/>
+                    <field name="semester_id" />
+<!--                    <field name="sequence" options="{&quot;group_by_tooltip&quot;: {&quot;requirements&quot;: &quot;Description&quot;}}"/>-->
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_card oe_kanban_global_click">
-                                <div class="o_kanban_card_content d-flex">
-                                    <div>
-                                        <field name="image" widget="image" class="oe_avatar" alt="Avatar"/>
-                                    </div>
-                                    <div class="oe_kanban_details d-flex flex-column ms-3">
-                                        <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+                            <div class="oe_kanban_global_click oe_kanban_card o_kanban_record_has_image_fill">
+                                <div class="o_kanban_image_fill_left o_kanban_image_full">
+                                    <field name="image" widget="image" class="" alt="Avatar"/>
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                    <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
 <!--                                        <div class="d-flex align-items-baseline text-break" invisible="not email">-->
 <!--&lt;!&ndash;                                            <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"/><field name="email"/>&ndash;&gt;-->
 <!--                                        </div>-->
-                                        <div class="o_kanban_tags_section"/>
-                                        <ul>
-                                            <li >Theory hours: <field name="theory_hours"/></li>
-                                            <li>Practice hours: <field name="practice_hours"/></li>
-                                            <li>Career: <field name="career_id"/></li>
-                                        </ul>
-                                    </div>
+                                    <div class="o_kanban_tags_section"/>
+                                    <ul>
+                                        <li>Theory hours: <field name="theory_hours"/></li>
+                                        <li>Practice hours: <field name="practice_hours"/></li>
+                                        <li>Career: <field name="career_id"/></li>
+                                        <li>Credits: <field name="credits"/></li>
+                                    </ul>
                                 </div>
                             </div>
                         </t>

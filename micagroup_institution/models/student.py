@@ -7,6 +7,7 @@ class Student(models.Model):
     _description = "Student"
 
     name = fields.Char(string="Name", required=True)
+    code = fields.Char(string='Code', readonly=True)
     birth_date = fields.Date(string='Birth Date', required=True)
     identification = fields.Char(string='Identification', required=True)
     email = fields.Char(string='Email', required=True)
@@ -29,5 +30,10 @@ class Student(models.Model):
     academic_record_ids = fields.Many2many(comodel_name='course.course', string='Academic Record')
     thesis = fields.Binary(string='Thesis')
     image = fields.Image(string='Image')
+    res_user_id = fields.Many2one(comodel_name='res.users', string='Usuario')
 
+    @api.model
+    def create(self, vals):
+        vals['code'] = self.env['ir.sequence'].sudo().next_by_code('sequence_student_private_institution')
+        return super(Student, self).create(vals)
 

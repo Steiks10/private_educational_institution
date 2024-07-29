@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="sequence_student_private_institution" model="ir.sequence">
+            <field name="name">Student Sequence</field>
+            <field name="code">sequence_student_private_institution</field>
+            <field name="prefix">%(year)s-S</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="sequence_course_private_institution" model="ir.sequence">
+            <field name="name">Course Sequence</field>
+            <field name="code">sequence_course_private_institution</field>
+            <field name="prefix">%(year)s-C</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="sequence_subject_private_institution" model="ir.sequence">
+            <field name="name">Subject Sequence</field>
+            <field name="code">sequence_subject_private_institution</field>
+            <field name="prefix">%(year)s-Subject</field>
+            <field name="padding">2</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="sequence_contract_private_institution" model="ir.sequence">
+            <field name="name">contract Sequence</field>
+            <field name="code">sequence_contract_private_institution</field>
+            <field name="prefix">%(year)s-Ins</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
