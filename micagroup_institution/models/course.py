@@ -20,14 +20,22 @@ class CourseGrade(models.Model):
     #     ('reproved', 'Reproved'),
     # ])
     teacher_id = fields.Many2one(comodel_name='teacher.teacher', string="Teacher")
-    student_grade_ids = fields.One2many(comodel_name='course.course.line', inverse_name='course_grade_id', compute='get_student_inscribed_in_the_course')
+    student_ids = fields.Many2many(comodel_name='student.student', compute='get_student_inscribed_in_the_course')
+    student_grade_ids = fields.Many2many(comodel_name='course.course.grade.line', string='Students', compute='get_student_grades_of_the_course')
 
 
-    @api.depends('student_grade_ids')
+    def get_student_grades_of_the_course(self):
+        for record in self:
+            grades_in_course = self.env['course.course.grade.line'].search([('course_id', '=', record.id)])
+            if grades_in_course:
+                record.student_grade_ids = grades_in_course.ids
+            else:
+                record.student_grade_ids = False
+    @api.depends('student_ids')
     def get_numbers_of_students_inscribed(self):
         for record in self:
-            if record.student_grade_ids:
-                record.current_inscribed = len(record.student_grade_ids)
+            if record.student_ids:
+                record.current_inscribed = len(record.student_ids)
             else:
                 record.current_inscribed = 0
 
@@ -47,32 +55,95 @@ class CourseGrade(models.Model):
             # self.student_grade_ids.unlink()
             students_inscribed = self.env['inscription.contract'].search([('is_paid', '=', True), ('course_ids', 'in', record.id)]).mapped('student_id')
             if students_inscribed:
-                values = []
-                for student in students_inscribed:
-                    if student.id not in record.student_grade_ids.ids:
-
-                        values.append({
-                            'course_grade_id': record.id,
-                            'student_id': student.id,
-                        })
-                if values:
-                    record.student_grade_ids.create(values)
+                record.student_ids = students_inscribed.ids
             else:
-                record.student_grade_ids = False
+                record.student_ids = False
+
+    def get_course_grade_of_course(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Grades of course',
+            'view_mode': 'tree,form',
+            'res_model': 'course.course.grade.line',
+            # 'context': "{'create': True}",
+            'domain': [('course_id', '=', self.id)],
+        }
+    def get_evaluation_of_course(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Evaluations of course',
+            'view_mode': 'tree',
+            'res_model': 'evaluation.evaluation',
+            # 'context': "{'create': True}",
+            'domain': [('course_id', '=', self.id)],
+        }
 
     @api.model
     def create(self, vals):
         vals['code'] = self.env['ir.sequence'].sudo().next_by_code('sequence_course_private_institution')
         return super(CourseGrade, self).create(vals)
 
-class CourseGradeLine(models.Model):
-    _name = "course.course.line"
-    _description = "Course Grade Line"
 
-    course_grade_id = fields.Many2one(comodel_name='course.course', string='Course Grade')
-    student_id = fields.Many2one(comodel_name='student.student', string='Student')
-    student_id_email = fields.Char(related='student_id.email', string='Email')
-    student_id_phone = fields.Char(related='student_id.phone', string='Phone')
-    student_id_identification = fields.Char(related='student_id.identification', string='Identification')
-    student_id_image = fields.Image(related='student_id.image', string="Image")
-    score = fields.Float(string="Score", readonly=False)
+class CourseGradeLine(models.Model):
+    _name = "course.course.grade.line"
+    _description = "Course Grade Lines"
+
+
+
+    course_id = fields.Many2one(comodel_name="course.course", string='Course', required=True)
+    student_id = fields.Many2one(comodel_name="student.student", string='Student', required=True)
+    evaluation_id = fields.Many2one(comodel_name='evaluation.evaluation', string='Evaluation', required=True) #
+
+    # available_students_ids = fields.Many2many(comodel_name="student.student", string='students inscribed')
+    # available_evaluation_ids = fields.Many2many(comodel_name="evaluation.evaluation", string='evaluations available')
+    score = fields.Float(string='Score')
+    # domain_activation = fields.Boolean(string='Domain', compute='get_domain_for_fields_in_lines') #domain = lambda self
+    is_final_evaluation = fields.Boolean(string='Definitive note')
+
+    @api.onchange('course_id')
+    def _get_domain_of_student(self):
+        print('hola')
+        # course = self.env['course.course'].search([('id', '=', self.course_id.id)])
+
+        domain = {
+            'student_id': [('id', '=', self.course_id.student_ids.ids)],
+            'evaluation_id': [('course_id', '=', self.course_id.id)]
+        }
+        return {'domain': domain}
+        # return {'domain': {'student_id': [('id', '=', self.course_id.student_ids.ids)]}}
+        # return [('id', 'in', students.ids)]
+    # @api.depends('course_id')
+    # def get_student_evaluations_availables(self):
+    #     self.available_students_ids = self.course_id.student_ids.ids
+    #     courses_ids = self.env['evaluation.evaluation'].search([('course_id', '=', self.course_id.id)])
+    #     self.available_evaluation_ids = courses_ids.ids
+
+    # @api.depends('course_id')
+    # def get_evaluation_availables(self):
+    #     for record in self:
+    #         courses_ids = self.env['evaluation.evaluation'].search([('course_id', '=', record.course_id.id)])
+    #         record.available_evaluation_ids = courses_ids.ids
+
+    # @api.onchange('available_students_ids', 'available_evaluation_ids')
+    # def _get_students_in_course(self):
+    #     domain = {
+    #         'student_id': [('id', '=', self.available_students_ids.ids)],
+    #         'evaluation_id': [('course_id', 'in', self.available_evaluation_ids.ids)]
+    #     }
+    #     return {'domain': domain}
+
+
+        # self.ensure_one()
+        # return {'domain': {'evaluation_id': [('course_id', 'in', self.available_evaluation_ids.ids)]}}
+
+    # @api.onchange('course_id')
+    # def get_domain_for_fields_in_lines(self):
+    #     # self.domain_activation = True
+    #     return {'domain': {'student_id': [('id', '=', self.course_id.student_ids.ids)]}}
+
+
+    # @api.onchange('course_id')
+    # def get_domain_for_fields_in_lines(self):
+    #     return {'domain': {'evaluation_id': [('course_id', '=', self.course_id.id)]}}

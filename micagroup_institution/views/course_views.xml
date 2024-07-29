@@ -23,10 +23,12 @@
             <field name="model">course.course</field>
             <field name="arch" type="xml">
                 <form string="Course">
-<!--                    <header>-->
-<!--                        <button name="action_write_note_to_student" class="oe_highlight" string="Change notes" type="object"/>-->
-<!--                    </header>-->
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" type="object" name="get_evaluation_of_course" icon="fa-file-text-o" string="Evaluations"></button>
+                            <button class="oe_stat_button" type="object" name="get_course_grade_of_course" icon="fa-file-text-o" string="Grades"></button>
+                        </div>
+
                         <div class="oe_title">
                             <label for="name"/>
                             <h1>
@@ -59,29 +61,29 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="Students" name="student_in_course">
-                                <field name="student_grade_ids">
+                            <page string="Students" name="student_ids_inscribed">
+                                <field name="student_ids">
                                     <kanban>
                                         <field name="id"/>
-                                        <field name="student_id"/>
-                                        <field name="student_id_email"/>
+                                        <field name="name"/>
+                                        <field name="email"/>
             <!--                            <field name="image"/>-->
                                         <templates>
                                             <t t-name="kanban-box">
                                                 <div class="oe_kanban_card oe_kanban_global_click">
                                                     <div class="o_kanban_card_content d-flex">
                                                         <div>
-                                                            <field name="student_id_image" widget="image" class="oe_avatar" alt="Avatar"/>
+                                                            <field name="image" widget="image" class="oe_avatar" alt="Avatar"/>
                                                         </div>
                                                         <div class="oe_kanban_details d-flex flex-column ms-3">
-                                                            <strong class="o_kanban_record_title oe_partner_heading"><field name="student_id"/></strong>
+                                                            <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
                                                             <div class="d-flex align-items-baseline text-break" >
-                                                                <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"/><field name="student_id_email"/>
+                                                                <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"/><field name="email"/>
                                                             </div>
                                                             <div class="o_kanban_tags_section"/>
                                                             <ul>
-                                                                <li>Identification card: <field name="student_id_identification"/></li>
-                                                                <li>Phone: <field name="student_id_phone"/></li>
+                                                                <li>Identification card: <field name="identification"/></li>
+                                                                <li>Phone: <field name="phone"/></li>
 <!--                                                                <li>Score: <field name="score"/></li>-->
                                                             </ul>
                                                         </div>
@@ -99,6 +101,18 @@
 <!--                                        <field name="gender"/>-->
 <!--                                        <field name="enrollment_date"/>-->
 <!--                                    </tree>-->
+                                </field>
+                            </page>
+                            <page name="grades_of_students" string="Grades">
+                                <field name="student_grade_ids">
+                                    <tree editable="1">
+                                        <field name="course_id"/>
+                                        <field name="student_id"/>
+                                        <field name="evaluation_id"/>
+                                        <field name="score"/>
+                                        <field name="is_final_evaluation"/>
+                                    </tree>
+
                                 </field>
                             </page>
                         </notebook>

@@ -20,6 +20,8 @@
         "views/contract_views.xml",
         "views/career_views.xml",
         "views/semester_views.xml",
+        "views/evaluation.xml",
+        "views/student_grades.xml",
         "views/menu_items.xml",
         "views/calendar_inherit_view_form.xml",
         "views/account_move_inherit_form.xml",
