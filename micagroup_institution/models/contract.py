@@ -54,8 +54,8 @@ class Contract(models.Model):
 
                 bill = self.env['account.move'].create({
                     'move_type': 'out_invoice',
-                    'journal_id': (self.env['account.journal'].search([('name', '=', "Customer Invoices")], limit=1)).id,
-                    'partner_id': (self.env['res.partner'].search([('user_ids', '=', record.student_id.res_user_id.id)], limit=1)).id,
+                    'journal_id': (self.env['account.journal'].sudo().search([('name', '=', "Customer Invoices")], limit=1)).id,
+                    'partner_id': (self.env['res.partner'].sudo().search([('user_ids', '=', record.student_id.res_user_id.id)], limit=1)).id,
                     'contract_id': record.id,
                     'invoice_date': datetime.now(),
                     'line_ids': lines
@@ -71,7 +71,7 @@ class Contract(models.Model):
 
     def get_payment_state(self):
         for record in self:
-            account = self.env['account.move'].search([('payment_state', '=', 'paid'), ('contract_id', '=', record.id)], limit=1)
+            account = self.env['account.move'].sudo().search([('payment_state', '=', 'paid'), ('contract_id', '=', record.id)], limit=1)
             if account:
                 record.is_paid = True
             else:
