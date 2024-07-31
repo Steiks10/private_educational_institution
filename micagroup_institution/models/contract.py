@@ -32,9 +32,18 @@ class Contract(models.Model):
             record.theory_hours = sum([course.subject_id.theory_hours for course in record.course_ids])
             record.practice_hours = sum([course.subject_id.practice_hours for course in record.course_ids])
 
+
+    def check_if_exists_the_contract_for_this_student(self, course_id):
+        inscription_contract = self.env['inscription.contract'].sudo().search(['&', ('course_id', '=', course_id), ('is_paid', '=', True)])
+        if inscription_contract:
+            return True
+        else:
+            return False
     def action_payment_inscription_contract(self):
         str_msg = ''
         for record in self:
+            if not record.course_ids:
+                raise ValidationError(f'You cannot pay the contract, you need to add a course')
             for course in record.course_ids:
                 if course.current_inscribed == course.limit_students:
                     str_msg += f"The course {course.name} is full.\n"
@@ -45,10 +54,11 @@ class Contract(models.Model):
                 raise ValidationError('The student must be registered to pay the contract.')
             else:
                 lines = []
+                # config = self.env['ir.config_parameter'].sudo().get_param('private_institution.value_of_unit_credit')
                 lines.append((0, 0, {
                     'product_id': (self.env['product.product'].search([('name', '=', "Inscription")])).id,
                     'quantity': 1,
-                    'price_unit': record.credits * 5,
+                    'price_unit': record.credits * self.env.company.value_of_unit_credit,
                     'tax_ids': False,
                 }))
 

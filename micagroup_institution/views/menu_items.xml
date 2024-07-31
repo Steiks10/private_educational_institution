@@ -6,68 +6,68 @@
                   name="Private Institution" sequence="1"
                   web_icon="micagroup_institution,static/description/odoo_icon.png"
                   action="action_subjects_views"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
 <!--        menus-->
         <menuitem id="student_of_private_institution_menu"
                   name="Students" sequence="2"
                   parent="private_institution_principal_menu"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"
         />
 
         <menuitem id="management_of_private_institution_menu"
                   name="Management" sequence="4"
                   parent="private_institution_principal_menu"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
 <!-- Submenu  -->
         <menuitem id="all_student_of_private_institution_menu"
                   name="Student" sequence="1"
                   parent="student_of_private_institution_menu"
                   action="action_student_views"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="inscription_contract_of_private_institution_menu"
                   name="Contract" sequence="2"
                   parent="student_of_private_institution_menu"
                   action="action_inscription_contract_views"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="student_grades_of_private_institution_menu"
                   name="Notes" sequence="3"
                   parent="student_of_private_institution_menu"
                   action="action_student_grades_views"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="management_teacher_of_private_institution_menu"
                   name="Teachers" sequence="1"
                   parent="management_of_private_institution_menu"
                   action="action_teacher_views"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="management_course_of_private_institution_menu"
                   name="Courses" sequence="2"
                   parent="management_of_private_institution_menu"
                   action="action_course_views"
-                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_student_private_institution,micagroup_institution.group_user_teacher_private_institution,micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="career_of_private_institution_menu"
                   name="Career" sequence="3"
                   parent="management_of_private_institution_menu"
                   action="action_career_views"
-                  groups="micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="semester_of_private_institution_menu"
                   name="Semester" sequence="4"
                   parent="management_of_private_institution_menu"
                   action="action_semester_views"
-                  groups="micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_director_private_institution"/>
 
         <menuitem id="evaluation_of_private_institution_menu"
                   name="Evaluations of courses" sequence="5"
                   parent="management_of_private_institution_menu"
                   action="action_evaluation_views"
-                  groups="micagroup_institution.group_user_teacher_private_institution"/>
+                  groups="micagroup_institution.group_user_director_private_institution,micagroup_institution.group_user_teacher_private_institution"/>
 
     </data>
 </odoo>

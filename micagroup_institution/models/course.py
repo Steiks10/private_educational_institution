@@ -53,8 +53,9 @@ class CourseGrade(models.Model):
     def get_student_inscribed_in_the_course(self):
         for record in self:
             # self.student_grade_ids.unlink()
-            students_inscribed = self.env['inscription.contract'].search([('is_paid', '=', True), ('course_ids', 'in', record.id)]).mapped('student_id')
-            if students_inscribed:
+            contracts = self.env['inscription.contract'].sudo().search(['&', ('is_paid', '=', True), ('course_ids', 'in', record.id)])
+            students_inscribed = contracts.filtered(lambda c: c.is_paid).mapped('student_id')
+            if students_inscribed :
                 record.student_ids = students_inscribed.ids
             else:
                 record.student_ids = False
@@ -90,16 +91,10 @@ class CourseGradeLine(models.Model):
     _name = "course.course.grade.line"
     _description = "Course Grade Lines"
 
-
-
     course_id = fields.Many2one(comodel_name="course.course", string='Course', required=True)
     student_id = fields.Many2one(comodel_name="student.student", string='Student', required=True)
     evaluation_id = fields.Many2one(comodel_name='evaluation.evaluation', string='Evaluation', required=True) #
-
-    # available_students_ids = fields.Many2many(comodel_name="student.student", string='students inscribed')
-    # available_evaluation_ids = fields.Many2many(comodel_name="evaluation.evaluation", string='evaluations available')
     score = fields.Float(string='Score')
-    # domain_activation = fields.Boolean(string='Domain', compute='get_domain_for_fields_in_lines') #domain = lambda self
     is_final_evaluation = fields.Boolean(string='Definitive note')
 
     @api.onchange('course_id')
