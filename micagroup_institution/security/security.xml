@@ -16,7 +16,10 @@
             <field name="category_id" ref="micagroup_institution.module_category_micagroup_institution"/>
         </record>
 
-
+        <record id="group_user_director_private_institution" model="res.groups">
+            <field name="name">Group user for director</field>
+            <field name="category_id" ref="micagroup_institution.module_category_micagroup_institution"/>
+        </record>
 
     </data>
 </odoo>

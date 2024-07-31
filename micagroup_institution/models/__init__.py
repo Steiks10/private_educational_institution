@@ -8,3 +8,5 @@ from . import career
 from . import account_move
 from . import semester
 from . import evaluation
+from . import res_config
+from . import res_company

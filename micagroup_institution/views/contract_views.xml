@@ -24,9 +24,10 @@
             <field name="arch" type="xml">
                 <form string="Inscription Contract">
                     <header>
-                        <button name="action_payment_inscription_contract" class="oe_highlight" string="Pay" type="object"/>
+                        <button name="action_payment_inscription_contract" class="oe_highlight" string="Pay" type="object" attrs="{'invisible': [('is_paid', '=', True)]}"/>
                     </header>
                     <sheet>
+                        <widget name="web_ribbon" title="Paid" attrs="{'invisible': [('is_paid', '=', False)]}"/>
                         <div class="oe_title" attrs="{'invisible': [('name', '=', False)]}">
                             <label for="name"/>
                             <h1>

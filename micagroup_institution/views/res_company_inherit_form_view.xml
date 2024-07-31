@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="private_institution_company_unit_credit_value" model="ir.ui.view">
+            <field name="name">private_institution_company_unit_credit_value</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='general_info']//field[@name='currency_id']" position="after">
+                    <field name="value_of_unit_credit"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
