@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="student_grades_tree_view" model="ir.ui.view">
+            <field name="name">student_grades_tree_view</field>
+            <field name="model">course.course.grade.line</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="course_id"/>
+                    <field name="student_id"/>
+                    <field name="evaluation_id"/>
+                    <field name="score"/>
+                    <field name="is_final_evaluation"/>
+<!--                    <field name="document"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="student_grades_form_view" model="ir.ui.view">
+            <field name="name">student_grades_form_view</field>
+            <field name="model">course.course.grade.line</field>
+            <field name="arch" type="xml">
+                <form string="Evaluation">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="course_id"/>
+                                <field name="student_id" attrs="{'invisible': [('course_id', '=', False)]}"/>
+                                <field name="evaluation_id" attrs="{'invisible': [('course_id', '=', False)]}"/>
+
+                            </group>
+                            <group>
+                                <field name="score"/>
+                                <field name="is_final_evaluation"/>
+<!--                                <field name="document"/>-->
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+        <record id="action_student_grades_views" model="ir.actions.act_window" >
+            <field name="name">Student Grades</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">course.course.grade.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

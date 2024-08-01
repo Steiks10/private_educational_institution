@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="subject_form_view" model="ir.ui.view">
+            <field name="name">subject_form_view</field>
+            <field name="model">subject.subject</field>
+            <field name="arch" type="xml">
+                <form string="Subject">
+                    <header>
+                        <field name="semester_id" widget="statusbar" class="o_field_statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+<!--                                <field name="sequence" invisible="0"/>-->
+                                <field name="is_active"/>
+                                <field name="credits"/>
+                                <field name="career_id"/>
+                            </group>
+                            <group>
+<!--                                <field name="semester_id"/>-->
+                                <field name="theory_hours"/>
+                                <field name="practice_hours"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="subject_kanban_view" model="ir.ui.view">
+            <field name="name">subject_kanban_view</field>
+            <field name="model">subject.subject</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="semester_id">
+<!--                    default_group_by="semester" -->
+                    <field name="name"/>
+                    <field name="semester_id" />
+<!--                    <field name="sequence" options="{&quot;group_by_tooltip&quot;: {&quot;requirements&quot;: &quot;Description&quot;}}"/>-->
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click oe_kanban_card o_kanban_record_has_image_fill">
+                                <div class="o_kanban_image_fill_left o_kanban_image_full">
+                                    <field name="image" widget="image" class="" alt="Avatar"/>
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                    <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong>
+<!--                                        <div class="d-flex align-items-baseline text-break" invisible="not email">-->
+<!--&lt;!&ndash;                                            <i class="fa fa-envelope me-1" role="img" aria-label="Email" title="Email"/><field name="email"/>&ndash;&gt;-->
+<!--                                        </div>-->
+                                    <div class="o_kanban_tags_section"/>
+                                    <ul>
+                                        <li>Theory hours: <field name="theory_hours"/></li>
+                                        <li>Practice hours: <field name="practice_hours"/></li>
+                                        <li>Career: <field name="career_id"/></li>
+                                        <li>Credits: <field name="credits"/></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_subjects_views" model="ir.actions.act_window" >
+            <field name="name">Subject Views</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">subject.subject</field>
+            <field name="view_mode">kanban,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

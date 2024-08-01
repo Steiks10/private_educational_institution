@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="inscription_contract_tree_view" model="ir.ui.view">
+            <field name="name">inscription_contract_tree_view</field>
+            <field name="model">inscription.contract</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="student_id"/>
+                    <field name="code"/>
+                    <field name="is_paid"/>
+                    <field name="credits"/>
+                    <field name="theory_hours"/>
+                    <field name="practice_hours"/>
+                    <field name="course_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="inscription_contract_form_view" model="ir.ui.view">
+            <field name="name">inscription_contract_form_view</field>
+            <field name="model">inscription.contract</field>
+            <field name="arch" type="xml">
+                <form string="Inscription Contract">
+                    <header>
+                        <button name="action_payment_inscription_contract" class="oe_highlight" string="Pay" type="object" attrs="{'invisible': [('is_paid', '=', True)]}"/>
+                    </header>
+                    <sheet>
+                        <widget name="web_ribbon" title="Paid" attrs="{'invisible': [('is_paid', '=', False)]}"/>
+                        <div class="oe_title" attrs="{'invisible': [('name', '=', False)]}">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="credits"/>
+                                <field name="is_paid"/>
+                                <field name="student_id"/>
+                            </group>
+                            <group>
+                                <field name="theory_hours"/>
+                                <field name="practice_hours"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Courses" name="courses_contract">
+                                <field name="course_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="code"/>
+                                        <field name="subject_id"/>
+                                        <field name="teacher_id"/>
+<!--                                        <field name="practice_hours"/>-->
+
+<!--                                        <field name="score"/>-->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_inscription_contract_views" model="ir.actions.act_window" >
+            <field name="name">Contract Views</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inscription.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
